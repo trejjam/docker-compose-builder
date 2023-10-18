@@ -11,13 +11,14 @@
     <PackageProjectUrl>https://github.com/aviationexam/docker-compose-builder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/aviationexam/docker-compose-builder</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <LangVersion>10.0</LangVersion>
+    <LangVersion>11.0</LangVersion>
     <PackageTags>Docker Docker-Compose Builder</PackageTags>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="PolySharp" Version="1.13.2" PrivateAssets="all" />
     <PackageReference Include="YamlDotNet" Version="13.7.1" />
   </ItemGroup>
 

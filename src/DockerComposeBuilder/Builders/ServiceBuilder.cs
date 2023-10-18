@@ -34,7 +34,7 @@ namespace DockerComposeBuilder.Builders
         {
             WorkingObject.DependsOn ??= new List<string>();
 
-            var dependsOnList = WorkingObject.DependsOn as List<string>;
+            var dependsOnList = WorkingObject.DependsOn;
 
             dependsOnList?.AddRange(services);
             return this;
@@ -126,6 +126,12 @@ namespace DockerComposeBuilder.Builders
         public ServiceBuilder WithImage(string image)
         {
             WorkingObject.Image = image;
+            return this;
+        }
+
+        public ServiceBuilder WithPrivileged(bool? privileged = true)
+        {
+            WorkingObject.Privileged = privileged;
             return this;
         }
 

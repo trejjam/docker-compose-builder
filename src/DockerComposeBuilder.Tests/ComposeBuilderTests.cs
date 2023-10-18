@@ -17,8 +17,11 @@ public class ComposeBuilderTests
         var result = compose.Serialize();
 
         Assert.Equal(
-            @"version: ""3.8""
-", result
+            """
+            version: "3.8"
+
+            """,
+            result
         );
     }
 
@@ -35,11 +38,41 @@ public class ComposeBuilderTests
         var result = compose.Serialize();
 
         Assert.Equal(
-            @"version: ""3.8""
-services:
-  a-service:
-    image: ""aviationexam/a-service""
-", result);
+            """
+            version: "3.8"
+            services:
+              a-service:
+                image: "aviationexam/a-service"
+
+            """,
+            result
+        );
+    }
+
+    [Fact]
+    public void PrivilegedServiceWithImageTest()
+    {
+        var compose = Builder.MakeCompose()
+            .WithServices(Builder.MakeService("a-service")
+                .WithImage("aviationexam/a-service")
+                .WithPrivileged()
+                .Build()
+            )
+            .Build();
+
+        var result = compose.Serialize();
+
+        Assert.Equal(
+            """
+            version: "3.8"
+            services:
+              a-service:
+                image: "aviationexam/a-service"
+                privileged: true
+
+            """,
+            result
+        );
     }
 
     [Fact]
@@ -58,13 +91,17 @@ services:
         var result = compose.Serialize();
 
         Assert.Equal(
-            @"version: ""3.8""
-services:
-  a-service:
-    image: ""aviationexam/a-service""
-    build:
-      dockerfile: ""a.dockerfile""
-", result);
+            """
+            version: "3.8"
+            services:
+              a-service:
+                image: "aviationexam/a-service"
+                build:
+                  dockerfile: "a.dockerfile"
+
+            """,
+            result
+        );
     }
 
     [Fact]
@@ -89,17 +126,21 @@ services:
         var result = compose.Serialize();
 
         Assert.Equal(
-            @"version: ""3.8""
-services:
-  a-service:
-    image: ""aviationexam/a-service""
-    build:
-      context: "".""
-      dockerfile: ""a.dockerfile""
-      args:
-      - ""ENV_1""
-      - ""ENV_2=value""
-      - ""ENV_3=value""
-", result);
+            """
+            version: "3.8"
+            services:
+              a-service:
+                image: "aviationexam/a-service"
+                build:
+                  context: "."
+                  dockerfile: "a.dockerfile"
+                  args:
+                  - "ENV_1"
+                  - "ENV_2=value"
+                  - "ENV_3=value"
+
+            """,
+            result
+        );
     }
 }
