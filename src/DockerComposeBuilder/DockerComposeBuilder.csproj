@@ -17,6 +17,10 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net8.0' " Label="Enable AOT">
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="PolySharp" Version="1.14.1" PrivateAssets="all" />
     <PackageReference Include="YamlDotNet" Version="16.1.3" />
